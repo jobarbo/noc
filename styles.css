@@ -1,0 +1,70 @@
+html {
+	flex-direction: column;
+}
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+body {
+	background-color: transparent;
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	--bodymargin: 10px;
+	--min: min(100vw);
+	--hContent: var(--min);
+	--wContent: var(--min);
+}
+canvas.p5Canvas {
+	display: block;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	height: auto !important;
+	max-width: var(--wContent);
+	max-height: var(--hContent);
+	max-height: 100vh;
+	width: auto !important;
+}
+
+/* having fun here */
+
+main {
+	height: 87dvh;
+	display: flex;
+	align-items: center;
+	border: 6px solid black;
+	justify-content: center;
+	box-shadow: -2px -3px 2px 5px inset rgba(0, 0, 0, 1);
+	position: relative;
+	transform: rotate(0deg);
+}
+
+main::after {
+	content: "";
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	box-shadow: 4px 3px 4px 0px inset rgb(0 0 0 / 38%), 6px 7px 7.3px inset rgb(0 0 0 / 11%), 13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041), 20px 21px 58px inset rgba(0, 0, 0, 0.025);
+}
+
+canvas.p5Canvas {
+	height: 100% !important;
+	box-shadow: 3.9px 4px 2.1px rgba(0, 0, 0, 0.4), 10.8px 11.2px 5.8px rgba(0, 0, 0, 0.209), 20.3px 20.9px 13.9px rgba(0, 0, 0, 0.136), 30px 31px 46px rgba(0, 0, 0, 0.088);
+}
