@@ -8,23 +8,55 @@ let H = window.innerHeight;
 let DIM;
 let MULTIPLIER;
 
-let randomCounts = [];
+let Walker = class {
+	constructor(hue, saturation, brightness) {
+		this.x = width / 2;
+		this.y = height / 2;
+		this.speed = random(20, 60);
+		this.hue = hue;
+		this.saturation = saturation;
+		this.brightness = brightness;
+	}
 
-let total = 50;
+	update() {
+		this.x += random(-this.speed / 1.2, this.speed);
+		this.y += random(-this.speed / 1.2, this.speed);
 
+		if (this.x > width + this.speed) {
+			this.x = -this.speed;
+		}
+		if (this.x < -this.speed) {
+			this.x = width + this.speed;
+		}
+		if (this.y > height + this.speed) {
+			this.y = -this.speed;
+		}
+		if (this.y < -this.speed) {
+			this.y = height + this.speed;
+		}
+	}
+
+	show() {
+		stroke(this.hue, this.saturation, this.brightness);
+		fill(this.hue + 170, this.saturation + 20, this.brightness - 40);
+		strokeWeight(this.speed / 6);
+		ellipse(this.x, this.y, this.speed * 4, this.speed * 4);
+	}
+};
+
+let walker;
 function setup() {
 	DIM = min(windowWidth, windowHeight);
 	MULTIPLIER = DIM / DEFAULT_SIZE;
 	c = createCanvas(DIM, DIM * 1.33);
+	colorMode(HSB);
 	pixelDensity(5);
-	background(255);
+	background(10, 10, 100);
+
+	walker = new Walker(10, 10, 100);
 }
 
 function draw() {
-	let hue = 1;
-	let size = random(1, 10);
-	console.log(size);
-	fill(hue, 255);
-	stroke(hue, 255);
-	circle(random(width), random(height), size);
+	walker.update();
+	walker.show();
 }
