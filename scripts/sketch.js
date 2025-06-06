@@ -2,9 +2,20 @@
 // Daniel Shiffman
 // http://natureofcode.com
 
+let DEFAULT_SIZE = 948;
+let W = window.innerWidth;
+let H = window.innerHeight;
+let DIM;
+let MULTIPLIER;
+
+let randomCounts = [];
+
+let total = 50;
+
 function setup() {
-	let canvas = createCanvas(400, 400);
-	canvas.parent(select("main")); // Attach canvas to main frame container
+	DIM = min(windowWidth, windowHeight);
+	MULTIPLIER = DIM / DEFAULT_SIZE;
+	c = createCanvas(DIM, DIM * 1.33);
 	pixelDensity(5);
 	background(255);
 }
