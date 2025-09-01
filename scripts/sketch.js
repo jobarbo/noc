@@ -25,11 +25,11 @@ function setup() {
 }
 
 function draw() {
-	let div = map(sin(frameCount / 100), -1, 1, 5, 55);
+	let div = map(cos(frameCount / 100), -1, 1, 5, 55);
 	let x = randomGaussian(width / 2, width / div);
 	let y = randomGaussian(height / 2, height / div);
 	s = w / 15;
-	hue = random(360);
+	hue = randomGaussian(15, map(cos(frameCount / 100), -1, 1, 155, 1));
 	stroke(80, 30, hue);
 	strokeWeight(s);
 	fill(100, 30, hue, 100);
