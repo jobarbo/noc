@@ -24,7 +24,7 @@ let seed = Math.random() * 2 ** 32;
 let clamp = (x, a, b) => (x < a ? a : x > b ? b : x);
 let smoothstep = (a, b, x) => (((x -= a), (x /= b - a)) < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x));
 let mix = (a, b, p) => a + p * (b - a);
-function dot(v1, v2) {
+function js_dot(v1, v2) {
 	if (v1.length !== 2 || v2.length !== 2) {
 		throw new Error("Both vectors should have exactly 2 elements.");
 	}
@@ -170,9 +170,9 @@ function sdf_box([x, y], [cx, cy], [w, h], r = 0) {
 	let dx = abs(x) - w + r;
 	let dy = abs(y) - h + r;
 	// External distance
-	let external = L(max(dx, 0), max(dy, 0)) - r;
+	let external = L(js_max(dx, 0), js_max(dy, 0)) - r;
 	// Internal distance
-	let internal = min(max(dx, dy), 0);
+	let internal = js_min(js_max(dx, dy), 0);
 	return external + internal;
 }
 
@@ -215,7 +215,7 @@ let dpi = (maxDPI = 3.0) => {
 };
 
 // if cmd + s is pressed, save the canvas'
-function saveCanvas(event) {
+function saveArtwork(event) {
 	console.log("saveCanvas function called");
 	if (event.key === "s" && (event.metaKey || event.ctrlKey)) {
 		console.log("Save shortcut detected");
@@ -226,7 +226,7 @@ function saveCanvas(event) {
 }
 
 // Example usage to add an event listener for key presses
-document.addEventListener("keydown", saveCanvas);
+document.addEventListener("keydown", saveArtwork);
 document.addEventListener("keydown", toggleGuides);
 
 // Function to toggle guide lines visibility
@@ -268,11 +268,11 @@ function saveArtwork() {
 	console.log("saved " + fileName);
 }
 
-function max(a, b) {
+function js_max(a, b) {
 	return a > b ? a : b;
 }
 
-function min(a, b) {
+function js_min(a, b) {
 	return a < b ? a : b;
 }
 
