@@ -1,22 +1,6 @@
 let noiseCanvasWidth = 1;
 let noiseCanvasHeight = 1;
 
-let random = (min, max) => {
-	if (max === undefined) {
-		max = min;
-		min = 0;
-	}
-	return Math.random() * (max - min) + min;
-};
-
-let randomInt = (min, max) => {
-	if (max === undefined) {
-		max = min;
-		min = 0;
-	}
-	return Math.floor(Math.random() * (max - min)) + min;
-};
-
 let fxhash = Math.random().toString(36).substring(2, 15);
 
 let seed = Math.random() * 2 ** 32;
