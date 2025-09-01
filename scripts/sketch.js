@@ -42,7 +42,6 @@ class Walker {
 		this.size = 120;
 		this.choices = ["up", "down", "left", "right"];
 		this.choice = random(this.choices);
-		console.log(this.choice);
 	}
 
 	display() {
