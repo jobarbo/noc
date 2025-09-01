@@ -7,30 +7,32 @@ let W = window.innerWidth;
 let H = window.innerHeight;
 let DIM;
 let MULTIPLIER;
+let canvas;
+let w = 30;
+let s = w / 15;
+let hue = 0;
 
 let randomCounts = [];
-
-let total = 50;
 
 function setup() {
 	DIM = min(windowWidth, windowHeight);
 	MULTIPLIER = DIM / DEFAULT_SIZE;
-	c = createCanvas(DIM, DIM * 1.33);
-	pixelDensity(6);
-	for (let i = 0; i < total; i++) {
-		randomCounts[i] = 0; // initialize all counts to 0
-	}
+	canvas = createCanvas(DIM, DIM * 1.0);
+	pixelDensity(2);
+	colorMode(OKLCH, 100, 100, 360, 100);
+	//colorMode(HSB, 360, 100, 100, 100);
+	background(40, 5, 35);
 }
 
 function draw() {
-	background(255, 255, 247);
-	let index = floor(random(randomCounts.length)); // pick a random index
-	randomCounts[index] += random(1, 50); // increment the count at that index
-
-	stroke(0);
-	fill(175);
-	let w = width / randomCounts.length;
-	for (let x = 0; x < randomCounts.length; x++) {
-		rect(x * w, height - randomCounts[x], w - 1, randomCounts[x]);
-	}
+	let div = map(sin(frameCount / 100), -1, 1, 5, 55);
+	let x = randomGaussian(width / 2, width / div);
+	let y = randomGaussian(height / 2, height / div);
+	s = w / 15;
+	hue = random(360);
+	stroke(80, 30, hue);
+	strokeWeight(s);
+	fill(100, 30, hue, 100);
+	//fill(random(360), 30, 100, 10);
+	circle(x, y, w);
 }
