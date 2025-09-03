@@ -16,62 +16,54 @@ function setup() {
 	MULTIPLIER = DIM / DEFAULT_SIZE;
 	canvas = createCanvas(DIM, DIM * 1.0);
 	pixelDensity(2);
+	frameRate(1);
 	colorMode(OKLCH, 100, 100, 360, 100);
 	background(40, 5, 35);
-
-	for (let i = 0; i < 10; i++) {
-		walker = new Walker(width / 2, height / 2, 1);
-		walkers.push(walker);
-	}
+	walker = new Walker();
 }
 
 function draw() {
-	for (let i = 0; i < walkers.length; i++) {
-		walkers[i].display();
-		walkers[i].move();
-	}
+	walker.step();
+	walker.show();
 }
 
 class Walker {
-	constructor(x, y, step_size) {
-		this.x = x;
-		this.y = y;
-		this.prevX = x;
-		this.prevY = y;
-		this.step_size = step_size;
-		this.size = 120;
-		this.choices = ["up", "down", "left", "right"];
-		this.choice = random(this.choices);
+	constructor() {
+		this.x = width / 2;
+		this.y = height / 2;
 	}
 
-	display() {
-		strokeWeight(0.5);
-		stroke(100, 0, 355, 100);
-		line(this.prevX, this.prevY, this.x, this.y);
+	show() {
+		stroke(0);
+		ellipse(this.x, this.y, 10, 10);
 	}
 
-	move() {
-		this.step_size = abs(randomGaussian(15, 15));
-		this.choice = random(["up", "down", "left", "right"]);
-		this.prevX = this.x;
-		this.prevY = this.y;
-		switch (this.choice) {
-			case "up":
-				this.y -= this.step_size;
-				this.y = constrain(this.y, this.size, height - this.size);
-				break;
-			case "down":
-				this.y += this.step_size;
-				this.y = constrain(this.y, this.size, height - this.size);
-				break;
-			case "left":
-				this.x -= this.step_size;
-				this.x = constrain(this.x, this.size, width - this.size);
-				break;
-			case "right":
-				this.x += this.step_size;
-				this.x = constrain(this.x, this.size, width - this.size);
-				break;
+	step() {
+		let step = 5;
+		let xstep = int(acceptreject() * step);
+		if (random([false, true])) {
+			xstep *= -1;
+		}
+		let ystep = int(acceptreject() * step);
+		//console.log(ystep);
+		if (random([false, true])) {
+			ystep *= -1;
+		}
+		this.x += xstep;
+		this.y += ystep;
+	}
+}
+
+function acceptreject() {
+	while (true) {
+		let r1 = random(1);
+
+		let p = sqrt(r1);
+		let r2 = random(1);
+
+		console.log(r2, p);
+		if (r2 < p) {
+			return r1;
 		}
 	}
 }
